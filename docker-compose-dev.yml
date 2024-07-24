@@ -70,6 +70,7 @@ services:
         condition: service_healthy
 
   client:
+    platform: linux/amd64
     build:
       context: ./client
       dockerfile: ../config/development/Dockerfile.client
@@ -92,10 +93,10 @@ services:
     environment:
       - DATABASE_URL=postgresql://user:password@postgres:5432/planka_db
 
-      # - DEFAULT_ADMIN_EMAIL=demo@demo.demo # Do not remove if you want to prevent this user from being edited/deleted
-      # - DEFAULT_ADMIN_PASSWORD=demo
-      # - DEFAULT_ADMIN_NAME=Demo Demo
-      # - DEFAULT_ADMIN_USERNAME=demo
+      - DEFAULT_ADMIN_EMAIL=demo@demo.demo # Do not remove if you want to prevent this user from being edited/deleted
+      - DEFAULT_ADMIN_PASSWORD=demo
+      - DEFAULT_ADMIN_NAME=Demo Demo
+      - DEFAULT_ADMIN_USERNAME=demo
     working_dir: /app
     command: ["sh", "-c", "npm run db:init"]
     volumes:
@@ -117,7 +118,7 @@ services:
       - "5432:5432"
     restart: unless-stopped
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres -d planka"]
+      test: ["CMD-SHELL", "pg_isready -U user -d planka_db"]
       interval: 10s
       timeout: 5s
       retries: 5
