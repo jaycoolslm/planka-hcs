@@ -97,6 +97,7 @@ services:
       - DEFAULT_ADMIN_PASSWORD=demo
       - DEFAULT_ADMIN_NAME=Demo Demo
       - DEFAULT_ADMIN_USERNAME=demo
+      - DEFAULT_ADMIN_HEDERA_ACCOUNT=0.0.2599594
     working_dir: /app
     command: ["sh", "-c", "npm run db:init"]
     volumes:

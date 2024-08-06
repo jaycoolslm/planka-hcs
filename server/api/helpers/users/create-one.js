@@ -17,6 +17,10 @@ const valuesValidator = (value) => {
     return false;
   }
 
+  if (!_.isNil(value.hederaAccount) && !_.isString(value.hederaAccount)) {
+    return false;
+  }
+
   return true;
 };
 
