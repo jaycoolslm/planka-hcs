@@ -12,6 +12,15 @@ const DEFAULT_EMAIL_UPDATE_FORM = {
   error: null,
 };
 
+const DEFAULT_HEDERA_ACCOUNT_UPDATE_FORM = {
+  data: {
+    hederaAccount: '',
+    currentPassword: '',
+  },
+  isSubmitting: false,
+  error: null,
+};
+
 const DEFAULT_PASSWORD_UPDATE_FORM = {
   data: {
     password: '',
@@ -57,6 +66,9 @@ export default class extends BaseModel {
     }),
     emailUpdateForm: attr({
       getDefault: () => DEFAULT_EMAIL_UPDATE_FORM,
+    }),
+    hederaAccountUpdateForm: attr({
+      getDefault: () => DEFAULT_HEDERA_ACCOUNT_UPDATE_FORM,
     }),
     passwordUpdateForm: attr({
       getDefault: () => DEFAULT_PASSWORD_UPDATE_FORM,
@@ -154,6 +166,54 @@ export default class extends BaseModel {
         userModel.update({
           emailUpdateForm: {
             ...userModel.emailUpdateForm,
+            error: null,
+          },
+        });
+
+        break;
+      }
+      case ActionTypes.USER_HEDERA_ACCOUNT_UPDATE: {
+        const userModel = User.withId(payload.id);
+
+        console.log('userModel', userModel);
+
+        userModel.update({
+          hederaAccountUpdateForm: {
+            ...userModel.hederaAccountUpdateForm,
+            data: payload.data,
+            isSubmitting: true,
+          },
+        });
+
+        break;
+      }
+      case ActionTypes.USER_HEDERA_ACCOUNT_UPDATE__SUCCESS: {
+        User.withId(payload.user.id).update({
+          ...payload.user,
+          hederaAccountUpdateForm: DEFAULT_HEDERA_ACCOUNT_UPDATE_FORM,
+        });
+
+        break;
+      }
+      case ActionTypes.USER_HEDERA_ACCOUNT_UPDATE__FAILURE: {
+        const userModel = User.withId(payload.id);
+
+        userModel.update({
+          hederaAccountUpdateForm: {
+            ...userModel.hederaAccountUpdateForm,
+            isSubmitting: false,
+            error: payload.error,
+          },
+        });
+
+        break;
+      }
+      case ActionTypes.USER_HEDERA_ACCOUNT_UPDATE_ERROR_CLEAR: {
+        const userModel = User.withId(payload.id);
+
+        userModel.update({
+          hederaAccountUpdateForm: {
+            ...userModel.hederaAccountUpdateForm,
             error: null,
           },
         });

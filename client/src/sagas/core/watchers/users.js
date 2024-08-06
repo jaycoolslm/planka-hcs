@@ -34,6 +34,15 @@ export default function* usersWatchers() {
     takeEvery(EntryActionTypes.CURRENT_USER_EMAIL_UPDATE_ERROR_CLEAR, () =>
       services.clearCurrentUserEmailUpdateError(),
     ),
+    takeEvery(EntryActionTypes.USER_HEDERA_ACCOUNT_UPDATE, ({ payload: { id, data } }) =>
+      services.updateUserHederaAccount(id, data),
+    ),
+    takeEvery(EntryActionTypes.CURRENT_USER_HEDERA_ACCOUNT_UPDATE, ({ payload: { data } }) =>
+      services.updateCurrentUserHederaAccount(data),
+    ),
+    takeEvery(EntryActionTypes.USER_HEDERA_ACCOUNT_UPDATE_ERROR_CLEAR, ({ payload: { id } }) =>
+      services.clearUserHederaAccountUpdateError(id),
+    ),
     takeEvery(EntryActionTypes.USER_PASSWORD_UPDATE, ({ payload: { id, data } }) =>
       services.updateUserPassword(id, data),
     ),

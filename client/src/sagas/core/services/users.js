@@ -8,14 +8,11 @@ import api from '../../../api';
 import { setAccessToken } from '../../../utils/access-token-storage';
 
 export function* createUser(data) {
-  console.log('data', data);
-
   yield put(actions.createUser(data));
 
   let user;
   try {
     ({ item: user } = yield call(request, api.createUser, data));
-    console.log('new user', user);
   } catch (error) {
     yield put(actions.createUser.failure(error));
     return;
@@ -107,6 +104,30 @@ export function* clearCurrentUserEmailUpdateError() {
   const id = yield select(selectors.selectCurrentUserId);
 
   yield call(clearUserEmailUpdateError, id);
+}
+
+export function* updateUserHederaAccount(id, data) {
+  yield put(actions.updateUserHederaAccount(id, data));
+
+  let user;
+  try {
+    ({ item: user } = yield call(request, api.updateUserHederaAccount, id, data));
+  } catch (error) {
+    yield put(actions.updateUserHederaAccount.failure(id, error));
+    return;
+  }
+
+  yield put(actions.updateUserHederaAccount.success(user));
+}
+
+export function* updateCurrentUserHederaAccount(data) {
+  const id = yield select(selectors.selectCurrentUserId);
+
+  yield call(updateUserHederaAccount, id, data);
+}
+
+export function* clearUserHederaAccountUpdateError(id) {
+  yield put(actions.clearUserHederaAccountUpdateError(id));
 }
 
 export function* updateUserPassword(id, data) {
@@ -312,6 +333,9 @@ export default {
   updateCurrentUserEmail,
   clearUserEmailUpdateError,
   clearCurrentUserEmailUpdateError,
+  updateUserHederaAccount,
+  updateCurrentUserHederaAccount,
+  clearUserHederaAccountUpdateError,
   updateUserPassword,
   updateCurrentUserPassword,
   clearUserPasswordUpdateError,

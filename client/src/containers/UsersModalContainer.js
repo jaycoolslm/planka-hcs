@@ -23,6 +23,8 @@ const mapDispatchToProps = (dispatch) =>
       onUsernameUpdateMessageDismiss: entryActions.clearUserUsernameUpdateError,
       onEmailUpdate: entryActions.updateUserEmail,
       onEmailUpdateMessageDismiss: entryActions.clearUserEmailUpdateError,
+      onHederaAccountUpdate: entryActions.updateUserHederaAccount,
+      onHederaAccountUpdateMessageDismiss: entryActions.clearUserHederaAccountUpdateError,
       onPasswordUpdate: entryActions.updateUserPassword,
       onPasswordUpdateMessageDismiss: entryActions.clearUserPasswordUpdateError,
       onDelete: entryActions.deleteUser,
