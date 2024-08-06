@@ -8,11 +8,14 @@ import api from '../../../api';
 import { setAccessToken } from '../../../utils/access-token-storage';
 
 export function* createUser(data) {
+  console.log('data', data);
+
   yield put(actions.createUser(data));
 
   let user;
   try {
     ({ item: user } = yield call(request, api.createUser, data));
+    console.log('new user', user);
   } catch (error) {
     yield put(actions.createUser.failure(error));
     return;
