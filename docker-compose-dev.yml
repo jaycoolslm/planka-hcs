@@ -72,8 +72,8 @@ services:
   client:
     platform: linux/amd64
     build:
-      context: ./client
-      dockerfile: ../config/development/Dockerfile.client
+      context: ./
+      dockerfile: ./config/development/Dockerfile.client
     volumes:
       - ./client:/app/client
       - /app/client/node_modules

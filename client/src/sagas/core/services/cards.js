@@ -108,6 +108,8 @@ export function* handleCardUpdate(card) {
 }
 
 export function* moveCard(id, listId, index = 0) {
+  console.log('moveCard', id, listId, index, selectors.selectNextCardPosition);
+
   const position = yield select(selectors.selectNextCardPosition, listId, index, id);
 
   yield call(updateCard, id, {

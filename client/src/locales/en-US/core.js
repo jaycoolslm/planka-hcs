@@ -19,6 +19,7 @@ export default {
       addManager_title: 'Add Manager',
       addMember_title: 'Add Member',
       addUser_title: 'Add User',
+      addHederaAccount_title: 'Add Hedera Account',
       administrator: 'Administrator',
       all: 'All',
       allChangesWillBeAutomaticallySavedAfterConnectionRestored:
@@ -99,6 +100,7 @@ export default {
       fromComputer_title: 'From Computer',
       fromTrello: 'From Trello',
       general: 'General',
+      hederaAccount: 'Hedera Account',
       hours: 'Hours',
       importBoard_title: 'Import Board',
       invalidCurrentPassword: 'Invalid current password',

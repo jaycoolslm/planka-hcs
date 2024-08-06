@@ -43,6 +43,13 @@ const Board = React.memo(
           return;
         }
 
+        console.log('dragEvent', {
+          draggableId,
+          type,
+          source,
+          destination,
+        });
+
         const id = parseDndId(draggableId);
 
         switch (type) {
