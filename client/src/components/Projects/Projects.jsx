@@ -14,7 +14,7 @@ import { ReactComponent as PlusIcon } from '../../assets/images/plus-icon.svg';
 import styles from './Projects.module.scss';
 import globalStyles from '../../styles.module.scss';
 
-const Projects = React.memo(({ items, canAdd, onAdd }) => {
+const Projects = React.memo(({ items, canAdd, onAdd, onAddWithAi }) => {
   const [t] = useTranslation();
 
   return (
@@ -54,16 +54,32 @@ const Projects = React.memo(({ items, canAdd, onAdd }) => {
           </Grid.Column>
         ))}
         {canAdd && (
-          <Grid.Column mobile={8} computer={4}>
-            <button type="button" className={classNames(styles.card, styles.add)} onClick={onAdd}>
-              <div className={styles.addTitleWrapper}>
-                <div className={styles.addTitle}>
-                  <PlusIcon className={styles.addGridIcon} />
-                  {t('action.createProject')}
+          <>
+            <Grid.Column mobile={8} computer={4}>
+              <button type="button" className={classNames(styles.card, styles.add)} onClick={onAdd}>
+                <div className={styles.addTitleWrapper}>
+                  <div className={styles.addTitle}>
+                    <PlusIcon className={styles.addGridIcon} />
+                    {t('action.createProject')}
+                  </div>
                 </div>
-              </div>
-            </button>
-          </Grid.Column>
+              </button>
+            </Grid.Column>
+            <Grid.Column mobile={8} computer={4}>
+              <button
+                type="button"
+                className={classNames(styles.card, styles.add)}
+                onClick={onAddWithAi}
+              >
+                <div className={styles.addTitleWrapper}>
+                  <div className={styles.addTitle}>
+                    <PlusIcon className={styles.addGridIcon} />
+                    {t('action.createProjectWithAi')}
+                  </div>
+                </div>
+              </button>
+            </Grid.Column>
+          </>
         )}
       </Grid>
     </Container>
@@ -74,6 +90,7 @@ Projects.propTypes = {
   items: PropTypes.array.isRequired, // eslint-disable-line react/forbid-prop-types
   canAdd: PropTypes.bool.isRequired,
   onAdd: PropTypes.func.isRequired,
+  onAddWithAi: PropTypes.func.isRequired,
 };
 
 export default Projects;

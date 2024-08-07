@@ -190,6 +190,7 @@ export default {
       createLabel: 'Create label',
       createNewLabel: 'Create new label',
       createProject: 'Create project',
+      createProjectWithAi: 'Create project with AI',
       delete: 'Delete',
       deleteAttachment: 'Delete attachment',
       deleteAvatar: 'Delete avatar',
