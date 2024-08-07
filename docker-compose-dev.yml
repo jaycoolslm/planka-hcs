@@ -83,6 +83,9 @@ services:
       - CHOKIDAR_USEPOLLING=true
       - BASE_URL=http://localhost:3000
       - REACT_APP_SERVER_BASE_URL=http://localhost:3000
+      - REACT_APP_HEDERA_CLIENT_ID=0.0.4661228 # this is a testnet account
+      - REACT_APP_HEDERA_CLIENT_KEY=302e020100300506032b657004220420d02c953c2a85e819de1caba134f80bcfd6ab7aff6453b7968484be1c2f83beff # this is a testnet account
+      - REACT_APP_HEDERA_TOPIC_ID=0.0.4661206
     working_dir: /app/client
     command: npm start
 

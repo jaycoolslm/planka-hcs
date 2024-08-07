@@ -7,6 +7,7 @@ import actions from '../../../actions';
 import api from '../../../api';
 import i18n from '../../../i18n';
 import { createLocalId } from '../../../utils/local-id';
+import { submitMessage } from './consensus';
 
 export function* createCard(listId, data, autoOpen) {
   const { boardId } = yield select(selectors.selectListById, listId);
@@ -67,6 +68,9 @@ export function* updateCard(id, data) {
   let card;
   try {
     ({ item: card } = yield call(request, api.updateCard, id, data));
+    submitMessage(`Card ${id} updated`).then((response) => {
+      console.log('Message submitted to topic', response);
+    });
   } catch (error) {
     yield put(actions.updateCard.failure(id, error));
     return;
@@ -108,8 +112,6 @@ export function* handleCardUpdate(card) {
 }
 
 export function* moveCard(id, listId, index = 0) {
-  console.log('moveCard', id, listId, index, selectors.selectNextCardPosition);
-
   const position = yield select(selectors.selectNextCardPosition, listId, index, id);
 
   yield call(updateCard, id, {
