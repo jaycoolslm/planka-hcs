@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
-import { Button, Form, Header, Modal } from 'semantic-ui-react';
+import { Button, Form, Modal, Message } from 'semantic-ui-react';
 import { Input } from '../../lib/custom-ui';
 
 import { useForm } from '../../hooks';
@@ -37,18 +37,24 @@ const AiModal = React.memo(({ defaultData, isSubmitting, onCreate, onClose }) =>
   }, []);
 
   return (
-    <Modal open basic closeIcon size="tiny" onClose={onClose}>
-      <Modal.Content>
-        <Header inverted size="huge">
-          {/* {t('common.createProject', {
+    <Modal open closeIcon size="large" onClose={onClose}>
+      <Modal.Header>
+        Create Project with the Help of AI
+        {/* {t('common.createProject', {
             context: 'title',
-          })} */}
-          Create Project with the Help of AI
-        </Header>
+        })} */}
+      </Modal.Header>
+      <Modal.Content scrolling className={styles['modal-content']}>
+        <div className={styles['message-container-right']}>
+          <Message floating compact right content="Some Prompt" />
+        </div>
+        <div className={styles['message-container-left']}>
+          <Message floating compact right content="Some AI Response. Supposedly a long one!" />
+        </div>
+      </Modal.Content>
+      <Modal.Actions>
         {/* <p>{t('common.enterProjectTitle')}</p> */}
-
-        <p>Create Project with the Help of AI</p>
-        <Form onSubmit={handleSubmit}>
+        <Form onSubmit={handleSubmit} className={styles.form}>
           <Input
             fluid
             inverted
@@ -59,18 +65,18 @@ const AiModal = React.memo(({ defaultData, isSubmitting, onCreate, onClose }) =>
             className={styles.field}
             onChange={handleFieldChange}
           />
+
           <Button
             inverted
             color="green"
             icon="checkmark"
-            // content={t('action.createProject')}
             content="Prompt"
             floated="right"
             loading={isSubmitting}
             disabled={isSubmitting}
           />
         </Form>
-      </Modal.Content>
+      </Modal.Actions>
     </Modal>
   );
 });
