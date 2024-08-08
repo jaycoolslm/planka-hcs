@@ -126,7 +126,7 @@ export function* moveCard(id, listId, index = 0) {
   // users is needed to get the user's hederaAccountId
   const users = yield select(selectors.selectUsersByCardId, id);
   // only allow one user to be paid / ticket
-  submitMessage(users[0].hederaAccount, 10, id, list.id).then((response) => {
+  submitMessage(users[0].hederaAccount, 10, id, list.name).then((response) => {
     console.log('Message submitted to topic', response);
   });
 }
