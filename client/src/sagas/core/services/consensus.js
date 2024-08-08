@@ -5,13 +5,14 @@ const client = Client.forTestnet().setOperator(
   process.env.REACT_APP_HEDERA_CLIENT_KEY,
 );
 
-export async function parseHCSMessage(accountId, amount, cardId, newList) {
-  return JSON.stringify({
+export function parseHCSMessage(accountId, amount, cardId, newList) {
+  const message = JSON.stringify({
     accountId,
     amount,
     cardId,
     newList,
   });
+  return message;
 }
 
 export async function submitMessage(accountId, amount, cardId, newList) {
