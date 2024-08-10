@@ -3,6 +3,9 @@ const PREFIX = '@entry';
 export default {
   PREFIX,
 
+  /* AI */
+  AI_PROMPT_CREATE: 'AI_PROMPT_CREATE',
+
   /* Socket */
 
   SOCKET_DISCONNECT_HANDLE: `${PREFIX}/SOCKET_DISCONNECT_HANDLE`,
