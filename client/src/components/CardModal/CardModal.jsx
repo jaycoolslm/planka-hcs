@@ -8,6 +8,7 @@ import { Markdown } from '../../lib/custom-ui';
 
 import { startStopwatch, stopStopwatch } from '../../utils/stopwatch';
 import NameField from './NameField';
+import PriceEdit from './PriceEdit';
 import DescriptionEdit from './DescriptionEdit';
 import Tasks from './Tasks';
 import Attachments from './Attachments';
@@ -30,6 +31,7 @@ import styles from './CardModal.module.scss';
 const CardModal = React.memo(
   ({
     name,
+    price,
     description,
     dueDate,
     stopwatch,
@@ -95,6 +97,15 @@ const CardModal = React.memo(
       (newName) => {
         onUpdate({
           name: newName,
+        });
+      },
+      [onUpdate],
+    );
+
+    const handlePriceUpdate = useCallback(
+      (newPrice) => {
+        onUpdate({
+          price: newPrice,
         });
       },
       [onUpdate],
@@ -348,6 +359,34 @@ const CardModal = React.memo(
                 )}
               </div>
             )}
+            {(price || canEdit) && (
+              <div className={styles.contentModule}>
+                <div className={styles.moduleWrapper}>
+                  <Icon name="money bill alternate outline" className={styles.moduleIcon} />
+                  <div className={styles.moduleHeader}>Price (HBAR)</div>
+                  {canEdit ? (
+                    <PriceEdit defaultValue={price} onUpdate={handlePriceUpdate}>
+                      {price ? (
+                        <button
+                          type="button"
+                          className={classNames(styles.descriptionText, styles.cursorPointer)}
+                        >
+                          {price}
+                        </button>
+                      ) : (
+                        <button type="button" className={styles.descriptionButton}>
+                          <span className={styles.descriptionButtonText}>
+                            Add a price for this card
+                          </span>
+                        </button>
+                      )}
+                    </PriceEdit>
+                  ) : (
+                    <div className={styles.descriptionText}>{price}</div>
+                  )}
+                </div>
+              </div>
+            )}
             {(description || canEdit) && (
               <div className={styles.contentModule}>
                 <div className={styles.moduleWrapper}>
@@ -519,9 +558,7 @@ const CardModal = React.memo(
                   <Icon name={isLinkCopied ? 'linkify' : 'unlink'} className={styles.actionIcon} />
                   {isLinkCopied
                     ? t('common.linkIsCopied')
-                    : t('action.copyLink', {
-                        context: 'title',
-                      })}
+                    : t('action.copyLink', { context: 'title' })}
                 </Button>
                 <DeletePopup
                   title="common.deleteCard"
@@ -555,6 +592,7 @@ const CardModal = React.memo(
 
 CardModal.propTypes = {
   name: PropTypes.string.isRequired,
+  price: PropTypes.string,
   description: PropTypes.string,
   dueDate: PropTypes.instanceOf(Date),
   stopwatch: PropTypes.object, // eslint-disable-line react/forbid-prop-types
@@ -610,6 +648,7 @@ CardModal.propTypes = {
 
 CardModal.defaultProps = {
   description: undefined,
+  price: undefined,
   dueDate: undefined,
   stopwatch: undefined,
 };

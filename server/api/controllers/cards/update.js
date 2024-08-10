@@ -70,6 +70,10 @@ module.exports = {
       type: 'string',
       isNotEmptyString: true,
     },
+    price: {
+      type: 'number',
+      allowNull: true,
+    },
     description: {
       type: 'string',
       isNotEmptyString: true,
@@ -171,6 +175,7 @@ module.exports = {
       'coverAttachmentId',
       'position',
       'name',
+      'price',
       'description',
       'dueDate',
       'stopwatch',

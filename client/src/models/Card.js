@@ -13,6 +13,7 @@ export default class extends BaseModel {
     id: attr(),
     position: attr(),
     name: attr(),
+    price: attr(),
     description: attr(),
     creatorUserId: oneToOne({
       to: 'User',
