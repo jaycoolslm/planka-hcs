@@ -19,6 +19,7 @@ const mapStateToProps = (state) => {
 
   const {
     name,
+    price,
     description,
     dueDate,
     stopwatch,
@@ -47,6 +48,7 @@ const mapStateToProps = (state) => {
 
   return {
     name,
+    price,
     description,
     dueDate,
     stopwatch,

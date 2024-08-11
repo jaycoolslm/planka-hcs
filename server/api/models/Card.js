@@ -19,6 +19,11 @@ module.exports = {
       type: 'string',
       required: true,
     },
+    price: {
+      type: 'string',
+      isNotEmptyString: true,
+      allowNull: true,
+    },
     description: {
       type: 'string',
       isNotEmptyString: true,

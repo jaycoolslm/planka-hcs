@@ -121,7 +121,7 @@ export default {
       name: 'Name',
       newestFirst: 'Newest first',
       newEmail: 'New e-mail',
-      newHederaAccount: 'New hedera account',
+      newHederaAccount: 'New Hedera account',
       newPassword: 'New password',
       newUsername: 'New username',
       noConnectionToServer: 'No connection to server',
