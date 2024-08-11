@@ -8,7 +8,6 @@ import api from '../../../api';
 import i18n from '../../../i18n';
 import { createLocalId } from '../../../utils/local-id';
 import { submitMessage } from './consensus';
-import { selectListById } from '../../../selectors/lists';
 
 export function* createCard(listId, data, autoOpen) {
   const { boardId } = yield select(selectors.selectListById, listId);
@@ -126,9 +125,7 @@ export function* moveCard(id, listId, index = 0) {
   // users is needed to get the user's hederaAccountId
   const users = yield select(selectors.selectUsersByCardId, id);
   // only allow one user to be paid / ticket
-  submitMessage(users[0].hederaAccount, 10, id, list.name).then((response) => {
-    console.log('Message submitted to topic', response);
-  });
+  submitMessage(users[0].hederaAccount, 10, id, list.name);
 }
 
 export function* moveCurrentCard(listId, index) {

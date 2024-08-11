@@ -175,8 +175,6 @@ export default class extends BaseModel {
       case ActionTypes.USER_HEDERA_ACCOUNT_UPDATE: {
         const userModel = User.withId(payload.id);
 
-        console.log('userModel', userModel);
-
         userModel.update({
           hederaAccountUpdateForm: {
             ...userModel.hederaAccountUpdateForm,
