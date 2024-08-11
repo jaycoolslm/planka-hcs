@@ -1,83 +1,100 @@
 import React, { useCallback, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
-import { Button, Form, Modal, Message } from 'semantic-ui-react';
+import { Button, Form, Modal, Message, Loader } from 'semantic-ui-react';
 import { Input } from '../../lib/custom-ui';
 
 import { useForm } from '../../hooks';
 
 import styles from './AiModal.module.scss';
 
-const AiModal = React.memo(({ stateData = { messages: [] }, onCreate, onClose }) => {
-  const [t] = useTranslation();
+const AiModal = React.memo(
+  ({ stateData = { messages: [], isSubmitting: false }, onCreate, onClose }) => {
+    const [t] = useTranslation();
 
-  const [data, handleFieldChange] = useForm(() => ({
-    messageContent: '',
-  }));
+    const [data, handleFieldChange] = useForm(() => ({
+      messageContent: '',
+    }));
 
-  const messageContentField = useRef(null);
+    const messageContentField = useRef(null);
 
-  const handleSubmit = useCallback(
-    (e) => {
-      e.preventDefault();
+    const handleSubmit = useCallback(
+      (e) => {
+        e.preventDefault();
 
-      const message = {
-        role: 'user',
-        content: data.messageContent.trim(),
-      };
+        const message = {
+          role: 'user',
+          content: data.messageContent.trim(),
+        };
 
-      if (!message.content) {
-        messageContentField.current.select();
-        return;
-      }
+        if (!message.content) {
+          messageContentField.current.select();
+          return;
+        }
 
-      onCreate(message);
-      handleFieldChange(undefined, { name: 'messageContent', value: '' });
-    },
-    [onCreate, data, handleFieldChange],
-  );
+        onCreate(message);
+        handleFieldChange(undefined, { name: 'messageContent', value: '' });
+      },
+      [onCreate, data, handleFieldChange],
+    );
 
-  useEffect(() => {
-    messageContentField.current.focus();
-  }, []);
+    useEffect(() => {
+      messageContentField.current.focus();
+    }, []);
 
-  return (
-    <Modal open closeIcon size="large" onClose={onClose}>
-      <Modal.Header>
-        Create Project with the Help of AI
-        {/* {t('common.createProject', {
+    return (
+      <Modal open closeIcon size="large" onClose={onClose}>
+        <Modal.Header>
+          Create Project with the Help of AI
+          {/* {t('common.createProject', {
             context: 'title',
         })} */}
-      </Modal.Header>
-      <Modal.Content scrolling className={styles['modal-content']}>
-        {stateData?.messages.map((item) => (
-          <div className={styles['message-container-right']} key={item.id}>
-            <Message floating compact content={`${item.content}`} />
-          </div>
-        ))}
-        <div className={styles['message-container-left']}>
-          <Message floating compact content="Some AI Response. Supposedly a long one!" />
-        </div>
-      </Modal.Content>
-      <Modal.Actions>
-        {/* <p>{t('common.enterProjectTitle')}</p> */}
-        <Form onSubmit={handleSubmit} className={styles.form}>
-          <Input
-            fluid
-            inverted
-            ref={messageContentField}
-            name="messageContent"
-            value={data.messageContent}
-            className={styles.field}
-            onChange={handleFieldChange}
-          />
+        </Modal.Header>
+        <Modal.Content scrolling className={styles['modal-content']}>
+          {stateData?.messages.map((item) => (
+            <div
+              className={
+                styles[item.role === 'user' ? 'message-container-right' : 'message-container-left']
+              }
+              key={item.id}
+            >
+              <Message floating compact content={`${item.content}`} />
+            </div>
+          ))}
+          {stateData.isSubmitting && (
+            <Message floating compact>
+              <Loader active size="tiny" inverted />
+            </Message>
+          )}
+        </Modal.Content>
+        <Modal.Actions>
+          {/* <p>{t('common.enterProjectTitle')}</p> */}
+          <Form onSubmit={handleSubmit} className={styles.form}>
+            <Input
+              fluid
+              inverted
+              ref={messageContentField}
+              name="messageContent"
+              value={data.messageContent}
+              disabled={stateData.isSubmitting}
+              className={styles.field}
+              onChange={handleFieldChange}
+            />
 
-          <Button inverted color="green" icon="checkmark" content="Send" floated="right" />
-        </Form>
-      </Modal.Actions>
-    </Modal>
-  );
-});
+            <Button
+              inverted
+              color="green"
+              icon="checkmark"
+              content="Send"
+              floated="right"
+              disabled={stateData.isSubmitting}
+            />
+          </Form>
+        </Modal.Actions>
+      </Modal>
+    );
+  },
+);
 
 AiModal.propTypes = {
   stateData: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types

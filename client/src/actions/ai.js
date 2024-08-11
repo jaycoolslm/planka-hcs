@@ -17,6 +17,13 @@ createAiMessage.success = (localId, message) => ({
   },
 });
 
+createAiMessage.IsSubmitting = (isSubmitting) => ({
+  type: ActionTypes.AI_MESSAGE_CREATE__IS_SUBMITTING,
+  payload: {
+    isSubmitting,
+  },
+});
+
 export default {
   createAiMessage,
 };
