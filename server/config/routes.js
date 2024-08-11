@@ -20,6 +20,7 @@ module.exports.routes = {
   'GET /api/users/:id': 'users/show',
   'PATCH /api/users/:id': 'users/update',
   'PATCH /api/users/:id/email': 'users/update-email',
+  'PATCH /api/users/:id/hedera-account': 'users/update-hedera-account',
   'PATCH /api/users/:id/password': 'users/update-password',
   'PATCH /api/users/:id/username': 'users/update-username',
   'POST /api/users/:id/avatar': 'users/update-avatar',

@@ -46,6 +46,12 @@ const updateUserEmail = (id, data, headers) =>
     item: transformUser(body.item),
   }));
 
+const updateUserHederaAccount = (id, data, headers) =>
+  socket.patch(`/users/${id}/hedera-account`, data, headers).then((body) => ({
+    ...body,
+    item: transformUser(body.item),
+  }));
+
 const updateUserPassword = (id, data, headers) =>
   socket.patch(`/users/${id}/password`, data, headers).then((body) => ({
     ...body,
@@ -90,6 +96,7 @@ export default {
   getCurrentUser,
   updateUser,
   updateUserEmail,
+  updateUserHederaAccount,
   updateUserPassword,
   updateUserUsername,
   updateUserAvatar,

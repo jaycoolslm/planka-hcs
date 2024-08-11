@@ -95,6 +95,36 @@ const clearUserEmailUpdateError = (id) => ({
   },
 });
 
+const updateUserHederaAccount = (id, data) => ({
+  type: ActionTypes.USER_HEDERA_ACCOUNT_UPDATE,
+  payload: {
+    id,
+    data,
+  },
+});
+
+updateUserHederaAccount.success = (user) => ({
+  type: ActionTypes.USER_HEDERA_ACCOUNT_UPDATE__SUCCESS,
+  payload: {
+    user,
+  },
+});
+
+updateUserHederaAccount.failure = (id, error) => ({
+  type: ActionTypes.USER_HEDERA_ACCOUNT_UPDATE__FAILURE,
+  payload: {
+    id,
+    error,
+  },
+});
+
+const clearUserHederaAccountUpdateError = (id) => ({
+  type: ActionTypes.USER_HEDERA_ACCOUNT_UPDATE_ERROR_CLEAR,
+  payload: {
+    id,
+  },
+});
+
 const updateUserPassword = (id, data) => ({
   type: ActionTypes.USER_PASSWORD_UPDATE,
   payload: {
@@ -294,6 +324,8 @@ export default {
   handleUserUpdate,
   updateUserEmail,
   clearUserEmailUpdateError,
+  updateUserHederaAccount,
+  clearUserHederaAccountUpdateError,
   updateUserPassword,
   clearUserPasswordUpdateError,
   updateUserUsername,
