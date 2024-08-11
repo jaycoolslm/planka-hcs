@@ -15,6 +15,9 @@ const buildData = () => {
   if (process.env.DEFAULT_ADMIN_USERNAME) {
     data.username = process.env.DEFAULT_ADMIN_USERNAME.toLowerCase();
   }
+  if (process.env.DEFAULT_ADMIN_HEDERA_ACCOUNT) {
+    data.hederaAccount = process.env.DEFAULT_ADMIN_HEDERA_ACCOUNT;
+  }
 
   return data;
 };

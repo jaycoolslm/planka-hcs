@@ -13,6 +13,7 @@ const Errors = {
 };
 
 const passwordValidator = (value) => zxcvbn(value).score >= 2; // TODO: move to config
+const hederaAccountValidator = (value) => value.startsWith('0.0.');
 
 module.exports = {
   inputs: {
@@ -28,6 +29,11 @@ module.exports = {
     },
     name: {
       type: 'string',
+      required: true,
+    },
+    hederaAccount: {
+      type: 'string',
+      custom: hederaAccountValidator,
       required: true,
     },
     username: {
@@ -81,6 +87,7 @@ module.exports = {
       'email',
       'password',
       'name',
+      'hederaAccount',
       'username',
       'phone',
       'organization',

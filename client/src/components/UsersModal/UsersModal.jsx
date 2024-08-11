@@ -16,6 +16,8 @@ const UsersModal = React.memo(
     onUsernameUpdateMessageDismiss,
     onEmailUpdate,
     onEmailUpdateMessageDismiss,
+    onHederaAccountUpdate,
+    onHederaAccountUpdateMessageDismiss,
     onPasswordUpdate,
     onPasswordUpdateMessageDismiss,
     onDelete,
@@ -58,6 +60,20 @@ const UsersModal = React.memo(
       [onEmailUpdateMessageDismiss],
     );
 
+    const handleHederaAccountUpdate = useCallback(
+      (id, data) => {
+        onHederaAccountUpdate(id, data);
+      },
+      [onHederaAccountUpdate],
+    );
+
+    const handleHederaAccountUpdateMessageDismiss = useCallback(
+      (id) => {
+        onHederaAccountUpdateMessageDismiss(id);
+      },
+      [onHederaAccountUpdateMessageDismiss],
+    );
+
     const handlePasswordUpdate = useCallback(
       (id, data) => {
         onPasswordUpdate(id, data);
@@ -96,6 +112,7 @@ const UsersModal = React.memo(
                 <Table.HeaderCell width={4}>{t('common.name')}</Table.HeaderCell>
                 <Table.HeaderCell width={4}>{t('common.username')}</Table.HeaderCell>
                 <Table.HeaderCell width={4}>{t('common.email')}</Table.HeaderCell>
+                <Table.HeaderCell width={4}>{t('common.hederaAccount')}</Table.HeaderCell>
                 <Table.HeaderCell>{t('common.administrator')}</Table.HeaderCell>
                 <Table.HeaderCell />
               </Table.Row>
@@ -107,6 +124,7 @@ const UsersModal = React.memo(
                   email={item.email}
                   username={item.username}
                   name={item.name}
+                  hederaAccount={item.hederaAccount}
                   avatarUrl={item.avatarUrl}
                   organization={item.organization}
                   phone={item.phone}
@@ -116,6 +134,7 @@ const UsersModal = React.memo(
                   isUsernameLocked={item.isUsernameLocked}
                   isDeletionLocked={item.isDeletionLocked}
                   emailUpdateForm={item.emailUpdateForm}
+                  hederaAccountUpdateForm={item.hederaAccountUpdateForm}
                   passwordUpdateForm={item.passwordUpdateForm}
                   usernameUpdateForm={item.usernameUpdateForm}
                   onUpdate={(data) => handleUpdate(item.id, data)}
@@ -123,6 +142,10 @@ const UsersModal = React.memo(
                   onUsernameUpdateMessageDismiss={() => handleUsernameUpdateMessageDismiss(item.id)}
                   onEmailUpdate={(data) => handleEmailUpdate(item.id, data)}
                   onEmailUpdateMessageDismiss={() => handleEmailUpdateMessageDismiss(item.id)}
+                  onHederaAccountUpdate={(data) => handleHederaAccountUpdate(item.id, data)}
+                  onHederaAccountUpdateMessageDismiss={() =>
+                    handleHederaAccountUpdateMessageDismiss(item.id)
+                  }
                   onPasswordUpdate={(data) => handlePasswordUpdate(item.id, data)}
                   onPasswordUpdateMessageDismiss={() => handlePasswordUpdateMessageDismiss(item.id)}
                   onDelete={() => handleDelete(item.id)}
@@ -151,6 +174,8 @@ UsersModal.propTypes = {
   onUsernameUpdateMessageDismiss: PropTypes.func.isRequired,
   onEmailUpdate: PropTypes.func.isRequired,
   onEmailUpdateMessageDismiss: PropTypes.func.isRequired,
+  onHederaAccountUpdate: PropTypes.func.isRequired,
+  onHederaAccountUpdateMessageDismiss: PropTypes.func.isRequired,
   onPasswordUpdate: PropTypes.func.isRequired,
   onPasswordUpdateMessageDismiss: PropTypes.func.isRequired,
   onDelete: PropTypes.func.isRequired,

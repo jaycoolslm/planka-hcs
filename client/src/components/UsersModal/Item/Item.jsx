@@ -13,6 +13,7 @@ const Item = React.memo(
     email,
     username,
     name,
+    hederaAccount,
     avatarUrl,
     organization,
     phone,
@@ -22,6 +23,7 @@ const Item = React.memo(
     isUsernameLocked,
     isDeletionLocked,
     emailUpdateForm,
+    hederaAccountUpdateForm,
     passwordUpdateForm,
     usernameUpdateForm,
     onUpdate,
@@ -29,6 +31,8 @@ const Item = React.memo(
     onUsernameUpdateMessageDismiss,
     onEmailUpdate,
     onEmailUpdateMessageDismiss,
+    onHederaAccountUpdate,
+    onHederaAccountUpdateMessageDismiss,
     onPasswordUpdate,
     onPasswordUpdateMessageDismiss,
     onDelete,
@@ -49,6 +53,7 @@ const Item = React.memo(
         <Table.Cell>{name}</Table.Cell>
         <Table.Cell>{username || '-'}</Table.Cell>
         <Table.Cell>{email}</Table.Cell>
+        <Table.Cell>{hederaAccount}</Table.Cell>
         <Table.Cell>
           <Radio toggle checked={isAdmin} disabled={isRoleLocked} onChange={handleIsAdminChange} />
         </Table.Cell>
@@ -58,6 +63,7 @@ const Item = React.memo(
               email,
               username,
               name,
+              hederaAccount,
               organization,
               phone,
               isAdmin,
@@ -65,6 +71,7 @@ const Item = React.memo(
               isUsernameLocked,
               isDeletionLocked,
               emailUpdateForm,
+              hederaAccountUpdateForm,
               passwordUpdateForm,
               usernameUpdateForm,
             }}
@@ -73,6 +80,8 @@ const Item = React.memo(
             onUsernameUpdateMessageDismiss={onUsernameUpdateMessageDismiss}
             onEmailUpdate={onEmailUpdate}
             onEmailUpdateMessageDismiss={onEmailUpdateMessageDismiss}
+            onHederaAccountUpdate={onHederaAccountUpdate}
+            onHederaAccountUpdateMessageDismiss={onHederaAccountUpdateMessageDismiss}
             onPasswordUpdate={onPasswordUpdate}
             onPasswordUpdateMessageDismiss={onPasswordUpdateMessageDismiss}
             onDelete={onDelete}
@@ -91,6 +100,7 @@ Item.propTypes = {
   email: PropTypes.string.isRequired,
   username: PropTypes.string,
   name: PropTypes.string.isRequired,
+  hederaAccount: PropTypes.string.isRequired,
   avatarUrl: PropTypes.string,
   organization: PropTypes.string,
   phone: PropTypes.string,
@@ -101,6 +111,7 @@ Item.propTypes = {
   isDeletionLocked: PropTypes.bool.isRequired,
   /* eslint-disable react/forbid-prop-types */
   emailUpdateForm: PropTypes.object.isRequired,
+  hederaAccountUpdateForm: PropTypes.object.isRequired,
   passwordUpdateForm: PropTypes.object.isRequired,
   usernameUpdateForm: PropTypes.object.isRequired,
   /* eslint-enable react/forbid-prop-types */
@@ -109,6 +120,8 @@ Item.propTypes = {
   onUsernameUpdateMessageDismiss: PropTypes.func.isRequired,
   onEmailUpdate: PropTypes.func.isRequired,
   onEmailUpdateMessageDismiss: PropTypes.func.isRequired,
+  onHederaAccountUpdate: PropTypes.func.isRequired,
+  onHederaAccountUpdateMessageDismiss: PropTypes.func.isRequired,
   onPasswordUpdate: PropTypes.func.isRequired,
   onPasswordUpdateMessageDismiss: PropTypes.func.isRequired,
   onDelete: PropTypes.func.isRequired,

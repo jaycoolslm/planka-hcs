@@ -67,6 +67,11 @@ module.exports = {
       type: 'string',
       required: true,
     },
+    hederaAccount: {
+      type: 'string',
+      required: true,
+      columnName: 'hedera_account',
+    },
     username: {
       type: 'string',
       isNotEmptyString: true,

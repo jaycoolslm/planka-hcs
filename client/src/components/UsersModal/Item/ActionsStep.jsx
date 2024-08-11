@@ -9,6 +9,7 @@ import { useSteps } from '../../../hooks';
 import UserInformationEditStep from '../../UserInformationEditStep';
 import UserUsernameEditStep from '../../UserUsernameEditStep';
 import UserEmailEditStep from '../../UserEmailEditStep';
+import UserHederaAccountEditStep from '../../UserHederaAccountEditStep';
 import UserPasswordEditStep from '../../UserPasswordEditStep';
 import DeleteStep from '../../DeleteStep';
 
@@ -18,6 +19,7 @@ const StepTypes = {
   EDIT_INFORMATION: 'EDIT_INFORMATION',
   EDIT_USERNAME: 'EDIT_USERNAME',
   EDIT_EMAIL: 'EDIT_EMAIL',
+  EDIT_HEDERA_ACCOUNT: 'EDIT_HEDERA_ACCOUNT',
   EDIT_PASSWORD: 'EDIT_PASSWORD',
   DELETE: 'DELETE',
 };
@@ -30,6 +32,8 @@ const ActionsStep = React.memo(
     onUsernameUpdateMessageDismiss,
     onEmailUpdate,
     onEmailUpdateMessageDismiss,
+    onHederaAccountUpdate,
+    onHederaAccountUpdateMessageDismiss,
     onPasswordUpdate,
     onPasswordUpdateMessageDismiss,
     onDelete,
@@ -48,6 +52,10 @@ const ActionsStep = React.memo(
 
     const handleEditEmailClick = useCallback(() => {
       openStep(StepTypes.EDIT_EMAIL);
+    }, [openStep]);
+
+    const handleEditHederaAccountClick = useCallback(() => {
+      openStep(StepTypes.EDIT_HEDERA_ACCOUNT);
     }, [openStep]);
 
     const handleEditPasswordClick = useCallback(() => {
@@ -92,6 +100,19 @@ const ActionsStep = React.memo(
               error={user.emailUpdateForm.error}
               onUpdate={onEmailUpdate}
               onMessageDismiss={onEmailUpdateMessageDismiss}
+              onBack={handleBack}
+              onClose={onClose}
+            />
+          );
+        case StepTypes.EDIT_HEDERA_ACCOUNT:
+          return (
+            <UserHederaAccountEditStep
+              defaultData={user.hederaAccountUpdateForm.data}
+              hederaAccount={user.hederaAccount}
+              isSubmitting={user.hederaAccountUpdateForm.isSubmitting}
+              error={user.hederaAccountUpdateForm.error}
+              onUpdate={onHederaAccountUpdate}
+              onMessageDismiss={onHederaAccountUpdateMessageDismiss}
               onBack={handleBack}
               onClose={onClose}
             />
@@ -150,6 +171,11 @@ const ActionsStep = React.memo(
                     context: 'title',
                   })}
                 </Menu.Item>
+                <Menu.Item className={styles.menuItem} onClick={handleEditHederaAccountClick}>
+                  {t('action.editHederaAccount', {
+                    context: 'title',
+                  })}
+                </Menu.Item>
                 <Menu.Item className={styles.menuItem} onClick={handleEditPasswordClick}>
                   {t('action.editPassword', {
                     context: 'title',
@@ -178,6 +204,8 @@ ActionsStep.propTypes = {
   onUsernameUpdateMessageDismiss: PropTypes.func.isRequired,
   onEmailUpdate: PropTypes.func.isRequired,
   onEmailUpdateMessageDismiss: PropTypes.func.isRequired,
+  onHederaAccountUpdate: PropTypes.func.isRequired,
+  onHederaAccountUpdateMessageDismiss: PropTypes.func.isRequired,
   onPasswordUpdate: PropTypes.func.isRequired,
   onPasswordUpdateMessageDismiss: PropTypes.func.isRequired,
   onDelete: PropTypes.func.isRequired,

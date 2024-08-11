@@ -7,7 +7,7 @@ import { usePrevious } from '../../lib/hooks';
 import { Input, Popup } from '../../lib/custom-ui';
 
 import { useForm } from '../../hooks';
-import { isPassword, isUsername } from '../../utils/validator';
+import { isHederaAccount, isPassword, isUsername } from '../../utils/validator';
 
 import styles from './UserAddStep.module.scss';
 
@@ -45,6 +45,7 @@ const UserAddStep = React.memo(
       password: '',
       name: '',
       username: '',
+      hederaAccount: '',
       ...defaultData,
     }));
 
@@ -53,6 +54,7 @@ const UserAddStep = React.memo(
     const emailField = useRef(null);
     const passwordField = useRef(null);
     const nameField = useRef(null);
+    const hederaAccountField = useRef(null);
     const usernameField = useRef(null);
 
     const handleSubmit = useCallback(() => {
@@ -60,6 +62,7 @@ const UserAddStep = React.memo(
         ...data,
         email: data.email.trim(),
         name: data.name.trim(),
+        hederaAccount: data.hederaAccount.trim(),
         username: data.username.trim() || null,
       };
 
@@ -80,6 +83,11 @@ const UserAddStep = React.memo(
 
       if (cleanData.username && !isUsername(cleanData.username)) {
         usernameField.current.select();
+        return;
+      }
+
+      if (!cleanData.hederaAccount && !isHederaAccount(cleanData.hederaAccount)) {
+        hederaAccountField.current.select();
         return;
       }
 
@@ -159,6 +167,16 @@ const UserAddStep = React.memo(
               ref={nameField}
               name="name"
               value={data.name}
+              readOnly={isSubmitting}
+              className={styles.field}
+              onChange={handleFieldChange}
+            />
+            <div className={styles.text}>{t('common.hederaAccount')}</div>
+            <Input
+              fluid
+              ref={hederaAccountField}
+              name="hederaAccount"
+              value={data.hederaAccount}
               readOnly={isSubmitting}
               className={styles.field}
               onChange={handleFieldChange}
