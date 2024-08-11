@@ -1,16 +1,16 @@
 import ActionTypes from '../constants/ActionTypes';
 
 const initialState = {
-  prompts: [],
+  messages: [],
 };
 
 // eslint-disable-next-line default-param-last
 export default (state = initialState, { type, payload }) => {
   switch (type) {
-    case ActionTypes.AI_PROMPT_CREATE__SUCCESS:
+    case ActionTypes.AI_MESSAGE_CREATE__SUCCESS:
       return {
         ...state,
-        prompts: [...state.prompts, payload.prompt],
+        messages: [...state.messages, payload.message],
       };
     default:
       return state;

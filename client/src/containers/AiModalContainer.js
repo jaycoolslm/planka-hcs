@@ -9,7 +9,7 @@ const mapStateToProps = ({ ai: stateData }) => ({ stateData });
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-      onCreate: entryActions.aiPromptCreate,
+      onCreate: entryActions.aiMessageCreate,
       onClose: entryActions.closeModal,
     },
     dispatch,

@@ -4,7 +4,7 @@ export default {
   PREFIX,
 
   /* AI */
-  AI_PROMPT_CREATE: 'AI_PROMPT_CREATE',
+  AI_MESSAGE_CREATE: 'AI_MESSAGE_CREATE',
 
   /* Socket */
 

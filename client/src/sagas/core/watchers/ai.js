@@ -5,8 +5,8 @@ import EntryActionTypes from '../../../constants/EntryActionTypes';
 
 export default function* aiWatchers() {
   yield all([
-    takeEvery(EntryActionTypes.AI_PROMPT_CREATE, ({ payload: { data } }) =>
-      services.createAiPrompt(data),
+    takeEvery(EntryActionTypes.AI_MESSAGE_CREATE, ({ payload: { data } }) =>
+      services.createAiMessage(data),
     ),
   ]);
 }

@@ -1,22 +1,22 @@
 import ActionTypes from '../constants/ActionTypes';
 
-const createAiPrompt = (prompt) => ({
-  type: ActionTypes.AI_PROMPT_CREATE,
+const createAiMessage = (message) => ({
+  type: ActionTypes.AI_MESSAGE_CREATE,
   payload: {
-    prompt,
+    message,
   },
 });
 
-createAiPrompt.success = (localId, prompt) => ({
-  type: ActionTypes.AI_PROMPT_CREATE__SUCCESS,
+createAiMessage.success = (localId, message) => ({
+  type: ActionTypes.AI_MESSAGE_CREATE__SUCCESS,
   payload: {
-    prompt: {
+    message: {
       id: localId,
-      ...prompt,
+      ...message,
     },
   },
 });
 
 export default {
-  createAiPrompt,
+  createAiMessage,
 };

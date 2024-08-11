@@ -8,36 +8,37 @@ import { useForm } from '../../hooks';
 
 import styles from './AiModal.module.scss';
 
-const AiModal = React.memo(({ stateData = { prompts: [] }, onCreate, onClose }) => {
+const AiModal = React.memo(({ stateData = { messages: [] }, onCreate, onClose }) => {
   const [t] = useTranslation();
 
   const [data, handleFieldChange] = useForm(() => ({
-    prompt: '',
+    messageContent: '',
   }));
 
-  const promptField = useRef(null);
+  const messageContentField = useRef(null);
 
   const handleSubmit = useCallback(
     (e) => {
       e.preventDefault();
 
-      const cleanData = {
-        prompt: data.prompt.trim(),
+      const message = {
+        role: 'user',
+        content: data.messageContent.trim(),
       };
 
-      if (!cleanData.prompt) {
-        promptField.current.select();
+      if (!message.content) {
+        messageContentField.current.select();
         return;
       }
 
-      onCreate(cleanData);
-      handleFieldChange(undefined, { name: 'prompt', value: '' });
+      onCreate(message);
+      handleFieldChange(undefined, { name: 'messageContent', value: '' });
     },
     [onCreate, data, handleFieldChange],
   );
 
   useEffect(() => {
-    promptField.current.focus();
+    messageContentField.current.focus();
   }, []);
 
   return (
@@ -49,9 +50,9 @@ const AiModal = React.memo(({ stateData = { prompts: [] }, onCreate, onClose }) 
         })} */}
       </Modal.Header>
       <Modal.Content scrolling className={styles['modal-content']}>
-        {stateData?.prompts.map((item) => (
+        {stateData?.messages.map((item) => (
           <div className={styles['message-container-right']} key={item.id}>
-            <Message floating compact content={`${item.prompt}`} />
+            <Message floating compact content={`${item.content}`} />
           </div>
         ))}
         <div className={styles['message-container-left']}>
@@ -64,14 +65,14 @@ const AiModal = React.memo(({ stateData = { prompts: [] }, onCreate, onClose }) 
           <Input
             fluid
             inverted
-            ref={promptField}
-            name="prompt"
-            value={data.prompt}
+            ref={messageContentField}
+            name="messageContent"
+            value={data.messageContent}
             className={styles.field}
             onChange={handleFieldChange}
           />
 
-          <Button inverted color="green" icon="checkmark" content="Prompt" floated="right" />
+          <Button inverted color="green" icon="checkmark" content="Send" floated="right" />
         </Form>
       </Modal.Actions>
     </Modal>
