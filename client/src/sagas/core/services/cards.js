@@ -121,11 +121,23 @@ export function* moveCard(id, listId, index = 0) {
 
   // card is needed to get the price of the card
   // TO DO: integrate price to card
-  // const card = yield select(selectors.selectCardById, id);
-  // users is needed to get the user's hederaAccountId
+  const card = yield select(selectors.selectCardById, id);
+  const price = Number(card.price);
+  // users is needed to get the user's hederaAccount
   const users = yield select(selectors.selectUsersByCardId, id);
+
+  if (!price) {
+    alert('Please enter a price for the ticket');
+  }
+
+  if (!users[0]) {
+    alert('Please assign a developer to the ticket');
+  }
   // only allow one user to be paid / ticket
-  submitMessage(users[0].hederaAccount, 10, id, list.name);
+  if (price && users[0]) {
+    const { hederaAccount } = users[0];
+    submitMessage(hederaAccount, price, id, list.name);
+  }
 }
 
 export function* moveCurrentCard(listId, index) {
