@@ -49,17 +49,13 @@ module.exports = {
         throw Errors.INVALID_CURRENT_PASSWORD;
       }
     } else if (!currentUser.isAdmin) {
-      throw Errors.USER_NOT_FOUND; // Forbidden
+      throw Errors.NOT_ENOUGH_RIGHTS; // Forbidden
     }
 
     let user = await sails.helpers.users.getOne(inputs.id);
 
     if (!user) {
       throw Errors.USER_NOT_FOUND;
-    }
-
-    if (user.email === sails.config.custom.defaultAdminEmail || user.isSso) {
-      throw Errors.NOT_ENOUGH_RIGHTS;
     }
 
     if (
