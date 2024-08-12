@@ -12,6 +12,7 @@ import ProjectAddModalContainer from '../../containers/ProjectAddModalContainer'
 import Background from '../Background';
 
 import styles from './Core.module.scss';
+import AiModalContainer from '../../containers/AiModalContainer';
 
 const Core = React.memo(
   ({ isInitializing, isSocketDisconnected, currentModal, currentProject, currentBoard }) => {
@@ -52,6 +53,7 @@ const Core = React.memo(
             {currentModal === ModalTypes.USERS && <UsersModalContainer />}
             {currentModal === ModalTypes.USER_SETTINGS && <UserSettingsModalContainer />}
             {currentModal === ModalTypes.PROJECT_ADD && <ProjectAddModalContainer />}
+            {currentModal === ModalTypes.AI && <AiModalContainer />}
           </>
         )}
         {isSocketDisconnected && (

@@ -2,6 +2,7 @@ version: '3.8'
 
 services:
   server:
+    platform: linux/amd64
     build:
       context: ./server
       dockerfile: ../config/development/Dockerfile.server

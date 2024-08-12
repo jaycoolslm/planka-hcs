@@ -20,6 +20,7 @@ const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       onAdd: entryActions.openProjectAddModal,
+      onAddWithAi: entryActions.openAiModal,
     },
     dispatch,
   );

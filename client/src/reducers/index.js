@@ -7,6 +7,7 @@ import root from './root';
 import auth from './auth';
 import core from './core';
 import ui from './ui';
+import ai from './ai';
 
 export default combineReducers({
   router,
@@ -16,4 +17,5 @@ export default combineReducers({
   auth,
   core,
   ui,
+  ai,
 });

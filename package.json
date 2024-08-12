@@ -51,7 +51,7 @@
     ],
     "rules": {
       "no-undef": "off",
-      "prettier/prettier": "error"
+      "prettier/prettier": 0
     }
   },
   "dependencies": {

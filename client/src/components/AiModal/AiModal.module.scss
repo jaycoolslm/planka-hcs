@@ -1,0 +1,26 @@
+:global(#app) {
+  .field {
+    flex-grow: 1;
+  }
+  .form {
+    display: flex;
+    gap: 1rem;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .modal-content {
+    min-height: 50vh;
+  }
+  .message-container-right {
+    display: flex;
+    justify-content: end;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  .message-container-left {
+    display: flex;
+    justify-content: start;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+}

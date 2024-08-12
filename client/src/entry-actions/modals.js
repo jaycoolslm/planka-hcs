@@ -22,6 +22,13 @@ const openProjectAddModal = () => ({
   },
 });
 
+const openAiModal = () => ({
+  type: EntryActionTypes.MODAL_OPEN,
+  payload: {
+    type: ModalTypes.AI,
+  },
+});
+
 const openProjectSettingsModal = () => ({
   type: EntryActionTypes.MODAL_OPEN,
   payload: {
@@ -38,6 +45,7 @@ export default {
   openUsersModal,
   openUserSettingsModal,
   openProjectAddModal,
+  openAiModal,
   openProjectSettingsModal,
   closeModal,
 };
